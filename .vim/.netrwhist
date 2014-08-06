@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/witold/programs/personal'
+let g:netrw_dirhist_2='/Users/witold/programs/personal/c'
+let g:netrw_dirhist_3='/Users/witold/Documents'
+let g:netrw_dirhist_4='/Users/witold/Documents/Processing'
+let g:netrw_dirhist_5='/Users/witold/Documents/Processing/velocity'
+let g:netrw_dirhist_6='/Users/witold/Documents/Processing/touch_recorder'
+let g:netrw_dirhist_7='/Users/witold/programs/inspirations/js/aleksandarrodic.com/js'
+let g:netrw_dirhist_8='/Users/witold/programs/sealabs/roli/core/elinux/.git'
+let g:netrw_dirhist_9='/Users/greg/dev/dice/web'
