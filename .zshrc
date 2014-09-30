@@ -43,22 +43,24 @@ ZSH_THEME="robbyrussell"
 plugins=(git osxi git-flow)
 
 source $ZSH/oh-my-zsh.sh
-#source ~/.zsh/git-prompt/zshrc.sh
+source ~/.init_dice.sh
+source `jump-bin --zsh-integration`
 
 # Customize to your needs...
-export GOPATH=$HOME/Documents/golang
+export GOPATH=$HOME/dev/golang
+export JAVA_HOME=$(/usr/libexec/java_home)
+export HADOOP_HOME=$HOME/dev/bigD/hadoop-2.5.1
+
 
 export PATH=$PATH:/opt/local/bin:/opt/local/sbin:/Users/witold/programs/toolchain/gcc-arm-none-eabi-4_7-2013q2/bin:/opt/local/bin:/usr/local/share/npm/bin:/usr/local/Cellar/ruby/1.9.3-p194/bin:/Users/witold/programs/tools/compound/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/usr/local/share/npm/bin:/usr/local/Cellar/ruby/1.9.3-p194/bin:/Users/witold/programs/tools/compound/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$HOME/bin
 export PATH=$PATH:$GOPATH/bin
-source ~/.zsh/git-prompt/zshrc.sh
+export PATH=$PATH:$HADOOP_HOME/bin
 
 # Customize to your needs...
 export PATH=$PATH:/opt/local/bin:/opt/local/sbin:/Users/witold/programs/toolchain/gcc-arm-none-eabi-4_7-2013q2/bin:/opt/local/bin:/usr/local/share/npm/bin:/usr/local/Cellar/ruby/1.9.3-p194/bin:/Users/witold/programs/tools/compound/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/usr/local/share/npm/bin:/usr/local/Cellar/ruby/1.9.3-p194/bin:/Users/witold/programs/tools/compound/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$HOME/bin
 export HOMEBREW_GITHUB_API_TOKEN=a51472e2101bc84ceb4e9aacc8bf7500b9e3f7da
-export PATH=$PATH:/Users/witold/programs/personal/others/swift-0.95-RC6/cog/modules/swift/bin
-
-export AWS_ACCESS_KEY_ID=AKIAIPUTFYYH4EAFS7YA
-export AWS_SECRET_ACCESS_KEY=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
+export PATH=$PATH:$HOME/programs/personal/others/swift-0.95-RC6/cog/modules/swift/bin
+export PATH=$PATH:$HOME/dev/dice/elk/logstash/bin/
 
 #sets up proper alias commands when called
 alias ls='ls -G'
@@ -82,8 +84,12 @@ alias pingoo="ping -c 3 www.google.com"
 alias clear="clear;ls"
 alias qwe="mvim"
 alias sqwe='sudo mvim'
-alias pam="./node_modules/brunch/bin/brunch w -s"
-alias ggrep= ""
+alias ggrep=""
+alias j="jump"
+
+function psgkill {
+    kill `ps -ef | grep $1 | grep -v grep | awk '{print $2}'`
+}
 
 # Pretty print JSON
 function ppjson {
@@ -96,7 +102,7 @@ function grec {
 }
 
 function sserver {
-    python -m SimpleHTTPServer
+    python -m SimpleHTTPServer $1
 }
 
 # Writes the JSON output of $1 in $2

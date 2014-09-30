@@ -3,8 +3,6 @@ set nocompatible
 execute pathogen#infect()
 
 "====[ Basic Config ]====
-let mapleader=","
-let g:mapleader=","
 filetype plugin indent on
 
 set noerrorbells         " don't beep
@@ -15,6 +13,8 @@ autocmd! GUIEnter * set vb t_vb=
 nmap <silent> <c-Right> :tabn<CR>
 nmap <silent> <c-Left> :tabp<CR>
 nmap :te :tabe
+nmap :Te :tabe
+nmap :E :e
 
 "====[ Easy moves between window splits ]===============
 
@@ -25,30 +25,10 @@ nmap <silent> <c-d> :wincmd l<CR>
 
 "====[ Plugin Configuration ]====
 let g:syntastic_check_on_open=0
-nmap <F8> :TagbarToggle<CR>
-
-"====[ Vim Airline Configuration ]====
-set laststatus=2
 
 "=================[ NERD Tree ]========================
-"autocmd vimenter * if !argc() | NERDTree | endif
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
-
-"=================[ Easy motion ]======================
-
-let g:EasyMotion_leader_key = '<Leader>'
-hi link EasyMotionTarget ErrorMsg
-hi link EasyMotionShade Comment
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
-
-"=================[ Yank Stack ]======================
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
-
-"=================[ Gundo ]======================
-nnoremap <F5> :GundoToggle<CR>
 
 "====[ Ensure autodoc'd plugins are supported ]===========
 runtime plugin/autodoc.vim
@@ -245,9 +225,13 @@ set wildignore+=*DS_Store*
 set wildignore+=vendor/rails/**
 set wildignore+=vendor/cache/**
 set wildignore+=*.gem
+set wildignore+=bin/**
 set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=*DS_Store*
+set wildignore+=.git,.gitkeep
+set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
 
 " ================ Case =======================
 set ignorecase
@@ -358,7 +342,7 @@ au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 
 function! ProjectSettings ()
     let l:path = expand('%:p')
-    if l:path =~ '/Users/witold/programs/dice/pam'
+    if l:path =~ '/Users/witold/dev/dice/pam'
         setlocal expandtab tabstop=2 shiftwidth=2
     endif
 endfunction
@@ -368,8 +352,6 @@ autocmd! BufReadPost,BufNewFile * call ProjectSettings()
 let g:go_fmt_autosave = 0
 let g:go_fmt_fail_silently = 1
 let g:go_play_open_browser = 0
-"au BufWritePre *.go :silent GoFmt
-
 
 "=====[ Completion Scheme ]===================================
 " Make the completion popup look menu-ish on a Mac...
@@ -377,70 +359,6 @@ highlight  Pmenu        ctermbg=white   ctermfg=black
 highlight  PmenuSel     ctermbg=blue    ctermfg=white   cterm=bold
 highlight  PmenuSbar    ctermbg=grey    ctermfg=grey
 highlight  PmenuThumb   ctermbg=blue    ctermfg=blue
-
-
-"=====[ Add or subtract comments ]===============================
-
-" Work out what the comment character is, by filetype...
-autocmd BufNewFile,BufRead   *                                    let b:cmt = exists('b:cmt') ? b:cmt : ''
-autocmd FileType             *sh,awk,python,perl,perl6,ruby,exp   let b:cmt = exists('b:cmt') ? b:cmt : '#'
-autocmd FileType             vim                                  let b:cmt = exists('b:cmt') ? b:cmt : '"'
-autocmd FileType             c,cpp,h,hpp,pde,java                 let b:cmt = exists('b:cmt') ? b:cmt : '//'
-autocmd FileType             go                                   let b:cmt = exists('b:cmt') ? b:cmt : '//'
-autocmd FileType             js                                   let b:cmt = exists('b:cmt') ? b:cmt : '//'
-autocmd FileType             coffee                               let b:cmt = exists('b:cmt') ? b:cmt : '#'
-
-" Work out whether the line has a comment then reverse that condition...
-function! ToggleComment ()
-    " What's the comment character???
-    let comment_char = exists('b:cmt') ? b:cmt : '#'
-
-    " Grab the line and work out whether it's commented...
-    let currline = getline(".")
-
-    " If so, remove it and rewrite the line...
-    if currline =~ '^' . comment_char
-        let repline = substitute(currline, '^' . comment_char, "", "")
-        call setline(".", repline)
-
-    " Otherwise, insert it...
-    else
-        let repline = substitute(currline, '^', comment_char, "")
-        call setline(".", repline)
-    endif
-endfunction
-
-" Toggle comments down an entire visual selection of lines...
-function! ToggleBlock () range
-    " What's the comment character???
-    let comment_char = exists('b:cmt') ? b:cmt : '#'
-
-    " Start at the first line...
-    let linenum = a:firstline
-
-    " Get all the lines, and decide their comment state by examining the first...
-    let currline = getline(a:firstline, a:lastline)
-    if currline[0] =~ '^' . comment_char
-        " If the first line is commented, decomment all...
-        for line in currline
-            let repline = substitute(line, '^' . comment_char, "", "")
-            call setline(linenum, repline)
-            let linenum += 1
-        endfor
-    else
-        " Otherwise, encomment all...
-        for line in currline
-            let repline = substitute(line, '^\('. comment_char . '\)\?', comment_char, "")
-            call setline(linenum, repline)
-            let linenum += 1
-        endfor
-    endif
-endfunction
-
-" Set up the relevant mappings
-nmap <silent> # :call ToggleComment()<CR>j0
-vmap <silent> # :call ToggleBlock()<CR>
-
 
 "=====[ Highlight cursor (plus row and column on request) ]===================
 
