@@ -109,6 +109,7 @@ function sserver {
 function saveAPIRequests {
  $1 | python -mjson.tool > $2
 }
+
 # Search in bash_history
 function hsearch {
 	history | grep -i $1
@@ -129,9 +130,11 @@ function hse {
 function line {
 	sed -n $1'p' $2
 }
+
 function psg {
 	ps -e | grep -in $1
 }
+
 # Git Shortcuts
 alias gpom="git push origin master"
 alias gpo="git push origin "
@@ -159,6 +162,7 @@ function sourceprofile {
 function showprofile {
 	mvim $HOME/.zshrc
 }
+
 # wget Shortcut
 function getsrc {
     wget $1 -O `echo "$1" | sed 's/\/$//' | awk -F/ '{print $NF }'`
@@ -178,7 +182,9 @@ function mcm {
 	make clean && make $1
 }
 
-
+function vimPlugins {
+    cat $HOME/.vim/bundle/*/.git/config | grep url | cut -d "=" -f2 | sed 's/ /git clone /g'
+}
 
 
 
