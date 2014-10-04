@@ -2,6 +2,7 @@ set nocompatible
 
 execute pathogen#infect()
 
+au VimEnter * RainbowParenthesesToggle
 "====[ Basic Config ]====
 filetype plugin indent on
 
@@ -15,6 +16,7 @@ nmap <silent> <c-Left> :tabp<CR>
 nmap :te :tabe
 nmap :Te :tabe
 nmap :E :e
+nmap :Vsp :vsp
 
 "====[ Easy moves between window splits ]===============
 
