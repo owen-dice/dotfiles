@@ -17,6 +17,8 @@ nmap :te :tabe
 nmap :Te :tabe
 nmap :E :e
 nmap :Vsp :vsp
+nmap :amke :make
+nmap :amek :make
 
 "====[ Easy moves between window splits ]===============
 
