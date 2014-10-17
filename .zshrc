@@ -86,6 +86,8 @@ alias qwe="mvim"
 alias sqwe='sudo mvim'
 alias ggrep=""
 alias j="jump"
+alias cdls="echo Greg, wake up..."
+alias less="less -s -M +Gg"
 
 function psgkill {
     kill `ps -ef | grep $1 | grep -v grep | awk '{print $2}'`
