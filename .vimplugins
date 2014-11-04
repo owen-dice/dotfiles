@@ -12,3 +12,4 @@ git clone https://github.com/elzr/vim-json.git
 git clone https://github.com/sophacles/vim-processing.git
 git clone git://github.com/tpope/vim-repeat.git
 git clone https://github.com/wavded/vim-stylus.git
+git clone git@github.com:kien/ctrlp.vim.git

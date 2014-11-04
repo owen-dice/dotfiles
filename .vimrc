@@ -20,6 +20,16 @@ nmap :Vsp :vsp
 nmap :amke :make
 nmap :amek :make
 
+
+"====[ CtrlP ]===============
+:nmap ; :CtrlPBuffer<CR>
+:let g:ctrlp_map = '<Leader>t'
+:let g:ctrlp_match_window_bottom = 0
+:let g:ctrlp_match_window_reversed = 0
+:let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
+:let g:ctrlp_working_path_mode = 0
+:let g:ctrlp_switch_buffer = 0
+
 "====[ Easy moves between window splits ]===============
 
 nmap <silent> <c-w> :wincmd k<CR>
@@ -30,6 +40,7 @@ nmap <silent> <c-d> :wincmd l<CR>
 "====[ Plugin Configuration ]====
 let g:syntastic_check_on_open=0
 
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 "=================[ NERD Tree ]========================
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
