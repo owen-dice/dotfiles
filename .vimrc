@@ -10,9 +10,28 @@ set noerrorbells         " don't beep
 set novisualbell
 set t_vb=
 autocmd! GUIEnter * set vb t_vb=
+
+"====[ Tabs ]===
+set guioptions+=e
+
 "====[ Easy moves between tabs]===============
 nmap <silent> <c-Right> :tabn<CR>
 nmap <silent> <c-Left> :tabp<CR>
+
+"================= Remaps ============================
+nnoremap <Space> <PageDown>
+
+" Indent/outdent current block...
+nmap %% $>i}``
+nmap $$ $<i}``
+
+nmap :Wq :wq
+nmap :wQ :wq
+nmap :Wq :wq
+nmap :WQ :wq
+nmap :Q  :q
+nmap :W  :w
+
 nmap :te :tabe
 nmap :Te :tabe
 nmap :E :e
@@ -20,6 +39,8 @@ nmap :Vsp :vsp
 nmap :amke :make
 nmap :amek :make
 
+nnoremap j gj
+nnoremap k gk
 
 "====[ CtrlP ]===============
 :nmap ; :CtrlPBuffer<CR>
@@ -51,17 +72,7 @@ runtime plugin/autodoc.vim
 "=====[ Enable Nmap command for documented mappings ]================
 runtime plugin/documap.vim
 
-"====[ Edit and auto-update this config file and plugins ]==========
-augroup VimReload
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
-
-Nmap <silent>  ;v   [Edit .vimrc]          :next $MYVIMRC<CR>
-Nmap           ;vv  [Edit .vim/plugin/...] :next ~/.vim/plugin/
-
 "====[ Set background hint (if possible) ]=============
-
 if $VIMBACKGROUND != ""
     exec 'set background=' . $VIMBACKGROUND
 else
@@ -102,7 +113,6 @@ if !exists(":DiffOrig")
 endif
 
 "====[ Use persistent undo ]=================
-
 if has('persistent_undo')
     set undodir=$HOME/tmp/.VIM_UNDO_FILES
     set undolevels=5000
@@ -110,7 +120,6 @@ if has('persistent_undo')
 endif
 
 "====[ Goto last location in non-empty files ]=======
-
 autocmd BufReadPost *  if line("'\"") > 1 && line("'\"") <= line("$")
                    \|     exe "normal! g`\""
                    \|  endif
@@ -131,7 +140,6 @@ augroup VisibleNaughtiness
 augroup END
 
 "====[ Set up smarter search behaviour ]=======================
-
 set incsearch       "Lookahead as search pattern is specified
 set ignorecase      "Ignore case in all searches...
 set smartcase       "...unless uppercase letters used
@@ -145,7 +153,6 @@ Nmap <silent> <BS><BS>  [Cancel highlighting and remove trailing whitespace]
 \             mz:%s/\s\+$//g<CR>`z:nohlsearch<CR>
 
 "====[ Handle encoding issues ]============
-
 set encoding=latin1
 
 Nmap <silent> U [Toggle UTF8]  :call ToggleUTF8()<CR>
@@ -220,15 +227,13 @@ set cursorline
 set number
 
 set incsearch   " do incremental searching
-set smartindent
 
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 autocmd filetype html,xml set listchars-=tab:>.
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
-nnoremap j gj
-nnoremap k gk
+
 
 " ================ Completion =======================
 set wildmenu
@@ -251,27 +256,6 @@ set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/*
 " ================ Case =======================
 set ignorecase
 set smartcase
-
-"================= Remaps ============================
-" Use space to jump down a page (like browsers do)...
-nnoremap <Space> <PageDown>
-
-" Take off and nuke the entire buffer contents from space
-" (It's the only way to be sure)...
-nmap XX 1GdG
-
-" Indent/outdent current block...
-nmap %% $>i}``
-nmap $$ $<i}``
-
-"====[ Recurrent typos when saving and quitting ]====
-nmap :Wq :wq
-nmap :wQ :wq
-nmap :Wq :wq
-nmap :WQ :wq
-nmap :Q  :q
-nmap :W  :w
-
 "=====[ Cut and paste from MacOSX clipboard ]====================
 "set paste
 "set clipboard=unnamed
@@ -412,7 +396,6 @@ highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
 "=====[ Make Visual modes work better ]==================
-
 "Square up visual selections...
 set virtualedit=block
 
