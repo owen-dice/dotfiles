@@ -51,7 +51,6 @@ export GOPATH=$HOME/dev/golang
 export JAVA_HOME=$(/usr/libexec/java_home)
 export HADOOP_HOME=$HOME/dev/bigD/hadoop-2.5.1
 
-
 export PATH=$PATH:/opt/local/bin:/opt/local/sbin:/Users/witold/programs/toolchain/gcc-arm-none-eabi-4_7-2013q2/bin:/opt/local/bin:/usr/local/share/npm/bin:/usr/local/Cellar/ruby/1.9.3-p194/bin:/Users/witold/programs/tools/compound/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/usr/local/share/npm/bin:/usr/local/Cellar/ruby/1.9.3-p194/bin:/Users/witold/programs/tools/compound/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$HOME/bin
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HADOOP_HOME/bin
@@ -188,6 +187,11 @@ function vimPlugins {
     cat $HOME/.vim/bundle/*/.git/config | grep url | cut -d "=" -f2 | sed 's/ /git clone /g'
 }
 
+function rsketch {
+    mkdir -p /tmp/processing
+    processing-java --output=/tmp/processing/ --force --run --sketch=$PWD
+}
 
-
-
+function editconflicts() { 
+  mvim +/"<<<<<<<" $( git diff --name-only --diff-filter=U | xargs )
+}

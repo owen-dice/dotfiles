@@ -12,7 +12,7 @@ set t_vb=
 autocmd! GUIEnter * set vb t_vb=
 
 "====[ Tabs ]===
-set guioptions+=e
+set guioptions+=gtrLme
 
 "====[ Easy moves between tabs]===============
 nmap <silent> <c-Right> :tabn<CR>
@@ -42,6 +42,8 @@ nmap :amek :make
 nnoremap j gj
 nnoremap k gk
 
+nmap :mcf :MultipleCursorFind
+
 "====[ CtrlP ]===============
 :nmap ; :CtrlPBuffer<CR>
 :let g:ctrlp_map = '<Leader>t'
@@ -50,6 +52,13 @@ nnoremap k gk
 :let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
 :let g:ctrlp_working_path_mode = 0
 :let g:ctrlp_switch_buffer = 0
+
+"====[ CtrlP ]===============
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<C-m>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
 
 "====[ Easy moves between window splits ]===============
 
