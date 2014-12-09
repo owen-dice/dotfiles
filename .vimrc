@@ -3,6 +3,10 @@ set nocompatible
 execute pathogen#infect()
 
 au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
 "====[ Basic Config ]====
 filetype plugin indent on
 

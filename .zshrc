@@ -148,7 +148,7 @@ alias gb='git branch'
 alias gl='git log -p --graph --abbrev-commit'
 alias gsb='git show-branch'
 alias gco='git checkout'
-alias gg='git grep'
+alias gg='git grep --ignore-case'
 alias gk='gitk --all'
 alias gr='git rebase'
 alias gri='git rebase --interactive'
@@ -192,6 +192,15 @@ function rsketch {
     processing-java --output=/tmp/processing/ --force --run --sketch=$PWD
 }
 
-function editconflicts() { 
-  mvim +/"<<<<<<<" $( git diff --name-only --diff-filter=U | xargs )
+function editconflicts() {
+    mvim +/"<<<<<<<" $( git diff --name-only --diff-filter=U | xargs )
 }
+
+function updateGlue() {
+    cd _vendor/src/github.com/dicefm/glue; git pull origin $(git rev-parse --abbrev-ref HEAD); cd -;
+}
+
+function testGoLoc() {
+    go test -p 1 `find ./app -mindepth 1 -type d -exec sh -c 'ls -1 "{}"|egrep -i -q "_test\.go$"' ';' -print`
+}
+
