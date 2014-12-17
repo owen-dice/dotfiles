@@ -2,7 +2,7 @@ set nocompatible
 
 execute pathogen#infect()
 
-au VimEnter * RainbowParenthesesToggle
+autocmd VimEnter,BufRead,BufNewFile * RainbowParenthesesToggleAll
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
@@ -47,7 +47,7 @@ nnoremap j gj
 nnoremap k gk
 
 nmap :mcf :MultipleCursorFind
-
+nmap :gf :GoFmt
 "====[ CtrlP ]===============
 :nmap ; :CtrlPBuffer<CR>
 :let g:ctrlp_map = '<Leader>t'
@@ -364,6 +364,10 @@ autocmd! BufReadPost,BufNewFile * call ProjectSettings()
 let g:go_fmt_autosave = 0
 let g:go_fmt_fail_silently = 1
 let g:go_play_open_browser = 0
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
 
 "=====[ Completion Scheme ]===================================
 " Make the completion popup look menu-ish on a Mac...
