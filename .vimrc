@@ -2,11 +2,6 @@ set nocompatible
 
 execute pathogen#infect()
 
-autocmd VimEnter,BufRead,BufNewFile * RainbowParenthesesToggleAll
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
 "====[ Basic Config ]====
 filetype plugin indent on
 
@@ -15,8 +10,6 @@ set novisualbell
 set t_vb=
 autocmd! GUIEnter * set vb t_vb=
 
-"====[ Tabs ]===
-set guioptions+=gtrLme
 
 "====[ Easy moves between tabs]===============
 nmap <silent> <c-Right> :tabn<CR>
@@ -38,8 +31,10 @@ nmap :W  :w
 
 nmap :te :tabe
 nmap :Te :tabe
+nmap :TE :tabe
 nmap :E :e
 nmap :Vsp :vsp
+nmap :Sp :sp
 nmap :amke :make
 nmap :amek :make
 
@@ -48,6 +43,10 @@ nnoremap k gk
 
 nmap :mcf :MultipleCursorFind
 nmap :gf :GoFmt
+
+"====[ Spelling ]============
+autocmd BufRead,BufNewFile *.md setlocal spell
+
 "====[ CtrlP ]===============
 :nmap ; :CtrlPBuffer<CR>
 :let g:ctrlp_map = '<Leader>t'
@@ -57,35 +56,39 @@ nmap :gf :GoFmt
 :let g:ctrlp_working_path_mode = 0
 :let g:ctrlp_switch_buffer = 0
 
-"====[ CtrlP ]===============
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
-"====[ Easy moves between window splits ]===============
+"=====[ Go ]==================
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
 
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+
+"====[ Window splits ]========
 nmap <silent> <c-w> :wincmd k<CR>
 nmap <silent> <c-s> :wincmd j<CR>
 nmap <silent> <c-a> :wincmd h<CR>
 nmap <silent> <c-d> :wincmd l<CR>
 
-"====[ Plugin Configuration ]====
+"====[ Misc ]=================
 let g:syntastic_check_on_open=0
-
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-"=================[ NERD Tree ]========================
+runtime plugin/autodoc.vim
+runtime plugin/documap.vim
+let g:rainbow_active = 1
+
+"====[ NERD Tree ]============
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
 
-"====[ Ensure autodoc'd plugins are supported ]===========
-runtime plugin/autodoc.vim
-
-"=====[ Enable Nmap command for documented mappings ]================
-runtime plugin/documap.vim
-
-"====[ Set background hint (if possible) ]=============
+"====[ Set background hint ]=============
 if $VIMBACKGROUND != ""
     exec 'set background=' . $VIMBACKGROUND
 else
@@ -99,6 +102,9 @@ colorscheme molokai
 if has('mouse')
   set mouse=a
 endif
+
+"====[ Tabs ]===
+set guioptions+=gtrLme
 
 " ================ Syntax Highlighting =======================
 " Switch syntax highlighting on, when the terminal has colors
@@ -116,14 +122,6 @@ if has("autocmd")
 else
   set autoindent always set autoindenting on
 endif " has("autocmd")
-
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-             \ | wincmd p | diffthis
-endif
 
 "====[ Use persistent undo ]=================
 if has('persistent_undo')
@@ -266,9 +264,6 @@ set wildignore+=*DS_Store*
 set wildignore+=.git,.gitkeep
 set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
 
-" ================ Case =======================
-set ignorecase
-set smartcase
 "=====[ Cut and paste from MacOSX clipboard ]====================
 "set paste
 "set clipboard=unnamed
@@ -360,14 +355,6 @@ function! ProjectSettings ()
 endfunction
 autocmd! BufReadPost,BufNewFile * call ProjectSettings()
 
-"=====[ Go ]===================================
-let g:go_fmt_autosave = 0
-let g:go_fmt_fail_silently = 1
-let g:go_play_open_browser = 0
-
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
 
 "=====[ Completion Scheme ]===================================
 " Make the completion popup look menu-ish on a Mac...
@@ -462,5 +449,3 @@ augroup NoSimultaneousEdits
     autocmd SwapExists * echohl None
     autocmd SwapExists * sleep 1
 augroup END
-
-
