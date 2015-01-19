@@ -48,9 +48,9 @@ source `jump-bin --zsh-integration`
 
 # Google Cloud
 # The next line updates PATH for the Google Cloud SDK.
-source '/Users/gregoirelejay/dev/dice/bigD/google-cloud-sdk/path.bash.inc'
+source '/Users/gregoirelejay/dev/dice/bigD/google-cloud-sdk/path.zsh.inc'
 # The next line enables bash completion for gcloud.
-source '/Users/gregoirelejay/dev/dice/bigD/google-cloud-sdk/completion.bash.inc'
+source '/Users/gregoirelejay/dev/dice/bigD/google-cloud-sdk/completion.zsh.inc'
 
 # Exports
 export GOPATH=$HOME/dev/golang
