@@ -10,8 +10,7 @@ set novisualbell
 set t_vb=
 autocmd! GUIEnter * set vb t_vb=
 
-
-"====[ Easy moves between tabs]===============
+"====[ Easy moves between tabs ]===============
 nmap <silent> <c-Right> :tabn<CR>
 nmap <silent> <c-Left> :tabp<CR>
 
@@ -40,6 +39,8 @@ nmap :amek :make
 
 nnoremap j gj
 nnoremap k gk
+
+nnoremap R "_d
 
 nmap :mcf :MultipleCursorFind
 nmap :gf :GoFmt
@@ -87,7 +88,8 @@ let g:rainbow_active = 1
 "====[ NERD Tree ]============
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
-
+let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\.pyc$']
 "====[ Set background hint ]=============
 if $VIMBACKGROUND != ""
     exec 'set background=' . $VIMBACKGROUND
@@ -346,6 +348,9 @@ set smarttab       "Use shiftwidths at left margin, tabstops everywhere else
 
 "=====[ Project specific Tab handling ]===================================
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
+au BufNewFile,BufRead *.py setlocal noet ts=4 sw=4 sts=4
+au BufNewFile,BufRead *.sh setlocal noet ts=2 sw=2
+au BufNewFile,BufRead *.R  setlocal noet ts=2 sw=2
 
 function! ProjectSettings ()
     let l:path = expand('%:p')

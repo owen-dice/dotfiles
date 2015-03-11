@@ -1,61 +1,26 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Uncomment this to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git osxi git-flow)
-
 source $ZSH/oh-my-zsh.sh
 source ~/.init_dice.sh
 source `jump-bin --zsh-integration`
 
 # Google Cloud
 # The next line updates PATH for the Google Cloud SDK.
-source '/Users/gregoirelejay/dev/dice/bigD/google-cloud-sdk/path.zsh.inc'
+source '/Users/gregoirelejay/dev/dice/bigD/tools/google-cloud-sdk/path.zsh.inc'
 # The next line enables bash completion for gcloud.
-source '/Users/gregoirelejay/dev/dice/bigD/google-cloud-sdk/completion.zsh.inc'
+source '/Users/gregoirelejay/dev/dice/bigD/tools/google-cloud-sdk/completion.zsh.inc'
+
+# Maven
+export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"
 
 # Exports
 export GOPATH=$HOME/dev/golang
 export JAVA_HOME=$(/usr/libexec/java_home)
-export HADOOP_HOME=$HOME/dev/bigD/hadoop-2.5.1
+export HADOOP_HOME=$HOME/dev/dice/bigD/hadoop-2.5.1
+export SPARK_HOME=$HOME/dev/dice/bigD/spark-1.2.0
+export SCALA_HOME=$HOME/dev/scala/scala-2.11.5
 export HOMEBREW_GITHUB_API_TOKEN=a51472e2101bc84ceb4e9aacc8bf7500b9e3f7da
 export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
 
@@ -63,8 +28,10 @@ export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
 export PATH=$PATH:/opt/local/bin:/opt/local/sbin:/Users/witold/programs/toolchain/gcc-arm-none-eabi-4_7-2013q2/bin:/opt/local/bin:/usr/local/share/npm/bin:/usr/local/Cellar/ruby/1.9.3-p194/bin:/Users/witold/programs/tools/compound/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:/opt/local/bin:/usr/local/share/npm/bin:/usr/local/Cellar/ruby/1.9.3-p194/bin:/Users/witold/programs/tools/compound/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$HOME/bin
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HADOOP_HOME/bin
+export PATH=$PATH:$SCALA_HOME/bin
 export PATH=$PATH:$HOME/programs/personal/others/swift-0.95-RC6/cog/modules/swift/bin
 export PATH=$PATH:$HOME/dev/dice/elk/logstash/bin/
+export PATH=$PATH:$HOME/dev/scala/activator-1.2.12-minimal
 
 # Aliases
 
@@ -225,3 +192,6 @@ function frall() {
     fi
     find * -type f | xargs perl -pi -e 's/$1/$2/g'
 }
+
+# OPAM configuration
+. /Users/gregoirelejay/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
