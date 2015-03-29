@@ -72,6 +72,9 @@ au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 
+"=====[ R ]==================
+let vimrplugin_assign = 2
+
 "====[ Window splits ]========
 nmap <silent> <c-w> :wincmd k<CR>
 nmap <silent> <c-s> :wincmd j<CR>
@@ -351,6 +354,7 @@ au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 au BufNewFile,BufRead *.py setlocal noet ts=4 sw=4 sts=4
 au BufNewFile,BufRead *.sh setlocal noet ts=2 sw=2
 au BufNewFile,BufRead *.R  setlocal noet ts=2 sw=2
+au BufNewFile,BufRead *.jade setlocal et ts=2 sw=2
 
 function! ProjectSettings ()
     let l:path = expand('%:p')
