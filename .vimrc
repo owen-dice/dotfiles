@@ -2,6 +2,9 @@ set nocompatible
 
 execute pathogen#infect()
 
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
 "====[ Basic Config ]====
 filetype plugin indent on
 
@@ -9,6 +12,10 @@ set noerrorbells         " don't beep
 set novisualbell
 set t_vb=
 autocmd! GUIEnter * set vb t_vb=
+
+"====[ Indent Guides ]===============
+:let g:indent_guides_guide_size = 1
+:let g:indent_guides_auto_colors=1
 
 "====[ Easy moves between tabs ]===============
 nmap <silent> <c-Right> :tabn<CR>
@@ -57,6 +64,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 :let g:ctrlp_working_path_mode = 0
 :let g:ctrlp_switch_buffer = 0
 
+"====[ Multi Cursor ]===============
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_prev_key='<C-p>'
@@ -93,6 +101,7 @@ map <C-n> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
 let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.pyc$']
+
 "====[ Set background hint ]=============
 if $VIMBACKGROUND != ""
     exec 'set background=' . $VIMBACKGROUND
@@ -107,9 +116,6 @@ colorscheme molokai
 if has('mouse')
   set mouse=a
 endif
-
-"====[ Tabs ]===
-set guioptions+=gtrLme
 
 " ================ Syntax Highlighting =======================
 " Switch syntax highlighting on, when the terminal has colors
@@ -270,8 +276,8 @@ set wildignore+=.git,.gitkeep
 set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
 
 "=====[ Cut and paste from MacOSX clipboard ]====================
-"set paste
-"set clipboard=unnamed
+set paste
+set clipboard=unnamed
 " Paste carefully in Normal mode...
 nmap <silent> <C-P> :set paste<CR>
                    \:let b:prevlen = len(getline(0,'$'))<CR>
@@ -351,19 +357,10 @@ set smarttab       "Use shiftwidths at left margin, tabstops everywhere else
 
 "=====[ Project specific Tab handling ]===================================
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
-au BufNewFile,BufRead *.py setlocal noet ts=4 sw=4 sts=4
+au BufNewFile,BufRead *.py setlocal et ts=4 sw=4 sts=4
 au BufNewFile,BufRead *.sh setlocal noet ts=2 sw=2
-au BufNewFile,BufRead *.R  setlocal noet ts=2 sw=2
+au BufNewFile,BufRead *.R  setlocal et ts=2 sw=2
 au BufNewFile,BufRead *.jade setlocal et ts=2 sw=2
-
-function! ProjectSettings ()
-    let l:path = expand('%:p')
-    if l:path =~ '/Users/witold/dev/dice/pam'
-        setlocal expandtab tabstop=2 shiftwidth=2
-    endif
-endfunction
-autocmd! BufReadPost,BufNewFile * call ProjectSettings()
-
 
 "=====[ Completion Scheme ]===================================
 " Make the completion popup look menu-ish on a Mac...
@@ -415,9 +412,6 @@ set virtualedit=block
 " Make BS/DEL work as expected in visual modes (i.e. delete the selected text)...
 vmap <BS> x
 
-" Make vaa select the entire file...
-vmap aa VGo1G
-
 " When shifting, retain selection over multiple shifts...
 vmap <expr> > KeepVisualSelection(">")
 vmap <expr> < KeepVisualSelection("<")
@@ -429,23 +423,6 @@ function! KeepVisualSelection(cmd)
     else
         return a:cmd . ":set smartindent\<CR>"
     endif
-endfunction
-
-" Temporarily add a column indicator when inserting or appending in visual mode...
-" (Should use <C-O> instead, but it doesn't seem to work)
-vnoremap <silent>  I  I<C-R>=TemporaryColumnMarkerOn()<CR>
-vnoremap <silent>  A  A<C-R>=TemporaryColumnMarkerOn()<CR>
-
-function! TemporaryColumnMarkerOn ()
-    let g:prev_cursorcolumn_state = g:cursorcolumn_visible ? 'on' : 'off'
-    call Toggle_CursorColumn('on')
-    inoremap <silent>  <ESC>  <ESC>:call TemporaryColumnMarkerOff(g:prev_cursorcolumn_state)<CR>
-    return ""
-endfunction
-
-function! TemporaryColumnMarkerOff (newstate)
-    call Toggle_CursorColumn(a:newstate)
-    iunmap <ESC>
 endfunction
 
 "====[ Open any file with a pre-existing swapfile in readonly mode "]=========
