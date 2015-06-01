@@ -13,8 +13,19 @@ set novisualbell
 set t_vb=
 autocmd! GUIEnter * set vb t_vb=
 
+:set synmaxcol=200
+
+"===[ In test ]================================
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+let g:SuperTabDefaultCompletionType = "<c-n>"
+nmap <D-S-F> :Ack<space>
+nmap <Leader>w  :ZoomWin<CR>
+nmap <Leader>nn :so %<CR>
+
 "====[ Indent Guides ]===============
-:let g:indent_guides_guide_size = 1
+:let g:indent_guides_guide_size=1
 :let g:indent_guides_auto_colors=1
 
 "====[ Easy moves between tabs ]===============
@@ -96,6 +107,11 @@ runtime plugin/autodoc.vim
 runtime plugin/documap.vim
 let g:rainbow_active = 1
 
+"====[ Pymode ]============
+let g:pymode_folding = 0
+let g:pymode_options_max_line_length = 120
+let g:pymode_lint_checkers = ['pyflakes']
+
 "====[ NERD Tree ]============
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeDirArrows=0
@@ -110,7 +126,11 @@ else
 endif
 
 " ================[ Theme ]=======================
-colorscheme molokai
+"colorscheme molokai
+colorscheme dante
+"colorscheme coffee
+"colorscheme detailed
+"colorscheme darkrobot
 
 " ================[ Mouse ]=======================
 if has('mouse')
@@ -208,12 +228,10 @@ function! Make_session_finder (filename)
 endfunction
 
 
-"=====[ Indentation and warping ]==================================
+"=====[ Misc]==================================
 set smartindent
 set autoindent
 set nowrap
-
-"====[ I hate modelines ]===================
 set modelines=0
 
 set title
@@ -223,14 +241,6 @@ set nomore
 set autowrite       "Save buffer automatically when changing files
 set autoread        "Always reload buffer when external changes detected
 
-"           +--Disable hlsearch while loading viminfo
-"           | +--Remember marks for last 50 files
-"           | |   +--Remember up to 10000 lines in each register
-"           | |   |      +--Remember up to 1MB in each register
-"           | |   |      |     +--Remember last 1000 search patterns
-"           | |   |      |     |     +---Remember last 1000 commands
-"           | |   |      |     |     |
-"           v v   v      v     v     v
 set viminfo=h,'50,<10000,s1000,/1000,:1000
 
 " allow backspacing over everything in insert mode
@@ -254,9 +264,6 @@ set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 autocmd filetype html,xml set listchars-=tab:>.
 
-" Wrapped lines goes down/up to next row, rather than next line in file.
-
-
 " ================ Completion =======================
 set wildmenu
 set wildmode=list:longest,full
@@ -276,7 +283,6 @@ set wildignore+=.git,.gitkeep
 set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
 
 "=====[ Cut and paste from MacOSX clipboard ]====================
-set paste
 set clipboard=unnamed
 " Paste carefully in Normal mode...
 nmap <silent> <C-P> :set paste<CR>
@@ -346,9 +352,7 @@ function! TransCopy(type, ...)
     let @@ = reg_save
 endfunction
 
-
 "=====[ Tab handling ]======================================
-
 set tabstop=4      "Tab indentation levels every four columns
 set shiftwidth=4   "Indent/outdent by four columns
 set expandtab      "Convert all tabs that are typed into spaces
@@ -363,7 +367,6 @@ au BufNewFile,BufRead *.R  setlocal et ts=2 sw=2
 au BufNewFile,BufRead *.jade setlocal et ts=2 sw=2
 
 "=====[ Completion Scheme ]===================================
-" Make the completion popup look menu-ish on a Mac...
 highlight  Pmenu        ctermbg=white   ctermfg=black
 highlight  PmenuSel     ctermbg=blue    ctermfg=white   cterm=bold
 highlight  PmenuSbar    ctermbg=grey    ctermfg=grey
@@ -426,7 +429,6 @@ function! KeepVisualSelection(cmd)
 endfunction
 
 "====[ Open any file with a pre-existing swapfile in readonly mode "]=========
-
 augroup NoSimultaneousEdits
     autocmd!
     autocmd SwapExists * let v:swapchoice = 'o'
