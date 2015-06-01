@@ -19,6 +19,7 @@ export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"
 export GOPATH=$HOME/dev/golang
 export JAVA_HOME=$(/usr/libexec/java_home)
 export HADOOP_HOME=$HOME/dev/dice/bigD/hadoop-2.5.1
+export HADOOP_PATH=$HOME/dev/dice/bigD/hadoop-2.5.1
 export SPARK_HOME=$HOME/dev/dice/bigD/spark-1.2.0
 export SCALA_HOME=$HOME/dev/scala/scala-2.11.5
 export HOMEBREW_GITHUB_API_TOKEN=a51472e2101bc84ceb4e9aacc8bf7500b9e3f7da
@@ -32,6 +33,7 @@ export PATH=$PATH:$SCALA_HOME/bin
 export PATH=$PATH:$HOME/programs/personal/others/swift-0.95-RC6/cog/modules/swift/bin
 export PATH=$PATH:$HOME/dev/dice/elk/logstash/bin/
 export PATH=$PATH:$HOME/dev/scala/activator-1.2.12-minimal
+export PATH=$PATH:$HOME/.cabal/bin/
 
 # Aliases
 
@@ -87,7 +89,7 @@ alias gr='git rebase'
 alias gri='git rebase --interactive'
 alias gcp='git cherry-pick'
 alias grm='git rm'
-
+alias taginit='/usr/local/bin/ctags -R'
 # Misc
 function psgkill {
     kill `ps -ef | grep $1 | grep -v grep | awk '{print $2}'`
@@ -192,6 +194,18 @@ function frall() {
     fi
     find * -type f | xargs perl -pi -e 's/$1/$2/g'
 }
+
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
 
 # OPAM configuration
 . /Users/gregoirelejay/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
