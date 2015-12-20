@@ -2,8 +2,6 @@ set nocompatible
 
 execute pathogen#infect()
 
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 "====[ Basic Config ]====
 filetype plugin indent on
@@ -16,13 +14,15 @@ autocmd! GUIEnter * set vb t_vb=
 :set synmaxcol=200
 
 "===[ In test ]================================
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
 
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:SuperTabDefaultCompletionType = "<c-n>"
 nmap <D-S-F> :Ack<space>
-nmap <Leader>w  :ZoomWin<CR>
 nmap <Leader>nn :so %<CR>
+
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 "====[ Indent Guides ]===============
 :let g:indent_guides_guide_size=1
@@ -62,6 +62,8 @@ nnoremap R "_d
 
 nmap :mcf :MultipleCursorFind
 nmap :gf :GoFmt
+
+let g:colorizer_startup = 0
 
 "====[ Spelling ]============
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -111,6 +113,10 @@ let g:rainbow_active = 1
 let g:pymode_folding = 0
 let g:pymode_options_max_line_length = 120
 let g:pymode_lint_checkers = ['pyflakes']
+let g:pymode_breakpoint = 0
+let g:pymode_doc = 0
+let g:pymode_lint_unmodified = 0
+
 
 "====[ NERD Tree ]============
 map <C-n> :NERDTreeToggle<CR>
@@ -126,8 +132,12 @@ else
 endif
 
 " ================[ Theme ]=======================
+set background=light
+"colorscheme kib_darktango
+"colorscheme solarized
+colorscheme candycode
+"colorscheme dante
 "colorscheme molokai
-colorscheme dante
 "colorscheme coffee
 "colorscheme detailed
 "colorscheme darkrobot
@@ -283,74 +293,12 @@ set wildignore+=.git,.gitkeep
 set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
 
 "=====[ Cut and paste from MacOSX clipboard ]====================
-set clipboard=unnamed
-" Paste carefully in Normal mode...
-nmap <silent> <C-P> :set paste<CR>
-                   \:let b:prevlen = len(getline(0,'$'))<CR>
-                   \!!pbtranspaste<CR>
-                   \:set nopaste<CR>
-                   \:set fileformat=unix<CR>
-                   \mv
-                   \:exec 'normal ' . (len(getline(0,'$')) - b:prevlen) . 'j'<CR>
-                   \V`v
-
-" When in Visual mode, paste over the selected region...
-vmap <silent> <C-P> x:call TransPaste(visualmode())<CR>
-
-function! TransPaste(type)
-    " Remember the last yanked text...
-    let reg_save = @@
-
-    " Grab the MacOSX clipboard contents via a shell command...
-    let clipboard = system("pbtranspaste")
-
-    " Put them in the yank buffer...
-    call setreg('@', clipboard, a:type)
-
-    " Paste them...
-    silent exe "normal! P"
-
-    " Restore the previous yanked text...
-    let @@ = reg_save
-endfunction
-
-
-" In Normal mode, yank the entire buffer...
-nmap <silent> <C-C> :w !pbtranscopy<CR><CR>
-
-" In Visual mode, yank the selection...
-vmap <silent> <C-C> :<C-U>call TransCopy(visualmode(), 1)<CR>
-
-function! TransCopy(type, ...)
-    " Yank inclusively (but remember the previous setup)...
-    let sel_save = &selection
-    let &selection = "inclusive"
-    let reg_save = @@
-
-    " Invoked from Visual mode, use '< and '> marks.
-    if a:0
-        silent exe "normal! `<" . a:type . "`>y"
-
-    " Or yank a line, if requested...
-    elseif a:type == 'line'
-        silent exe "normal! '[V']y"
-
-    " Or yank a block, if requested...
-    elseif a:type == 'block'
-        silent exe "normal! `[\<C-V>`]y"
-
-    " Or else, just yank the range...
-    else
-        silent exe "normal! `[v`]y"
-    endif
-
-    " Send it to the MacOSX clipboard...
-    call system("pbtranscopy", @@)
-
-    " Restore the previous setup...
-    let &selection = sel_save
-    let @@ = reg_save
-endfunction
+"set clipboard=unnamed
+if has("gui_macvim")
+  set clipboard=unnamed
+else
+  set clipboard=unnamedplus
+endif
 
 "=====[ Tab handling ]======================================
 set tabstop=4      "Tab indentation levels every four columns
