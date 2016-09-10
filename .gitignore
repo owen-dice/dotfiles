@@ -19,3 +19,5 @@
 !.zsh
 !._install.sh
 !._update.sh
+!.aliases
+!.env
