@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/gregoirelejay/data/sessions/dice-sessions__2015-05-28_2015-05-29.csv'
-let g:netrw_dirhist_2='/Users/gregoirelejay/data/sessions/dice-sessions__2015-01-01_2015-01-02.csv'
-let g:netrw_dirhist_3='/Users/gregoirelejay/dev/dice/ollivanders/tixey-cookbooks/admin-user'
-let g:netrw_dirhist_4='/Users/gregoirelejay/dev/dice/ollivanders/tixey-cookbooks'
-let g:netrw_dirhist_5='/Users/gregoirelejay/data'
-let g:netrw_dirhist_6='/Users/gregoirelejay/data/others/tweet_events__2014-08-01_2015-09-17.csv'
-let g:netrw_dirhist_7='/usr/local/var/postgres'
