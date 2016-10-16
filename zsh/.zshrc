@@ -1,7 +1,7 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
-plugins=(git osxi git-flow colored-man-pages docker pip)
+plugins=(git osxi git-flow colored-man-pages docker pip k)
 
 setopt CORRECT
 setopt RM_STAR_SILENT

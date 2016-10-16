@@ -9,6 +9,7 @@ let g:syntastic_ocaml_checkers = ['merlin']
 "====[ Basic Config ]====
 filetype plugin indent on
 
+set nofoldenable    " disable folding
 set noerrorbells         " don't beep
 set novisualbell
 set t_vb=
@@ -22,9 +23,15 @@ if has("gui_running")
     endif
 endif
 
+" search first in current directory then file directory for tag file
+set tags=tags,./tags
+
 "===[ In test ]================================
 "let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+let g:syntastic_javascript_checkers = ['eslint']
+
 set omnifunc=syntaxcomplete#Complete
 nmap <Leader>nn :so %<CR>
 
@@ -70,6 +77,7 @@ nmap :amke :make
 nmap :amek :make
 nnoremap j gj
 nnoremap k gk
+
 
 nnoremap R "_d
 

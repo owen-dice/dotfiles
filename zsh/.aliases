@@ -69,6 +69,17 @@ alias weather='curl wttr.in'
 alias moon='curl wttr.in/Moon'
 alias timeout='gtimeout'
 
+function echo_exec {
+    echo "--> $fg_bold[red] ${1} $reset_color"
+    eval ${1} 2>&1
+}
+
+function machine-resize {
+    echo_exec "docker-machine stop ${1}"
+    echo_exec "VBoxManage modifyvm ${1} --memory ${2}"
+    echo_exec "docker-machine start ${1}"
+}
+
 function ssh-tmux {
     ssh ${1} -t tmux a
 }
