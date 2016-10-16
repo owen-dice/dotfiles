@@ -10,12 +10,13 @@ let g:syntastic_ocaml_checkers = ['merlin']
 filetype plugin indent on
 
 set nofoldenable    " disable folding
-set noerrorbells         " don't beep
+set noerrorbells    " don't beep
 set novisualbell
 set t_vb=
 autocmd! GUIEnter * set vb t_vb=
 
 set synmaxcol=200
+
 set guioptions=gtrLm
 if has("gui_running")
     if has("gui_macvim")
@@ -75,9 +76,18 @@ nmap :yanks :Yanks
 
 nmap :amke :make
 nmap :amek :make
+
+
 nnoremap j gj
 nnoremap k gk
 
+" Invert Paragraph moves to match J/K
+nnoremap { }
+nnoremap } {
+
+" Paragraph moves on left hand
+nnoremap # }
+nnoremap @ {
 
 nnoremap R "_d
 
