@@ -31,7 +31,7 @@ alias du='du -sh'
 
 # Others
 alias pingoo="ping -c 3 www.google.com"
-alias clear="clear;ls"
+alias cclear="clear;ls"
 alias qwe="mvim"
 alias sqwe='sudo mvim'
 alias subl='open -a Sublime\ Text\ 2'

@@ -77,6 +77,14 @@ nmap :yanks :Yanks
 nmap :amke :make
 nmap :amek :make
 
+nmap :ag :Ag
+
+nnoremap <leader>a :Ag<space>
+nnoremap <leader>tt :TagbarToggle<CR>
+
+nmap <leader>y :YRShow<cr>
+let g:yankring_replace_n_pkey = '<leader>['
+let g:yankring_replace_n_nkey = '<leader>]'
 
 nnoremap j gj
 nnoremap k gk
@@ -86,8 +94,8 @@ nnoremap { }
 nnoremap } {
 
 " Paragraph moves on left hand
-nnoremap # }
-nnoremap @ {
+nnoremap @ }
+nnoremap # {
 
 nnoremap R "_d
 
@@ -100,7 +108,7 @@ let g:colorizer_startup = 0
 autocmd BufRead,BufNewFile *.md setlocal spell
 
 "====[ CtrlP ]===============
-:nmap ; :CtrlPBuffer<CR>
+:nmap <leader>; :CtrlPBuffer<CR>
 :let g:ctrlp_map = '<Leader>t'
 :let g:ctrlp_match_window_bottom = 0
 :let g:ctrlp_match_window_reversed = 0
@@ -172,12 +180,12 @@ endif
 " ================[ Theme ]=======================
 set background=light
 "colorscheme kib_darktango
-colorscheme solarized
+"colorscheme solarized
 "colorscheme badwolf
 "colorscheme leya
 "colorscheme base16-atelierforest
 "colorscheme fokus
-"colorscheme desertEx
+colorscheme desertEx
 "colorscheme summerfruit256
 "colorscheme summerfruit
 "colorscheme candycode
@@ -341,12 +349,12 @@ set wildignore+=.git,.gitkeep
 set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
 
 "=====[ Cut and paste from MacOSX clipboard ]====================
-"set clipboard=unnamed
-"if has("gui_macvim")
-  "set clipboard=unnamed
-"else
-  "set clipboard=unnamedplus
-"endif
+set clipboard=unnamed
+if has("gui_macvim")
+  set clipboard=unnamed
+else
+  set clipboard=unnamedplus
+endif
 
 "=====[ Tab handling ]======================================
 set tabstop=4      "Tab indentation levels every four columns
