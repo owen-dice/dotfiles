@@ -81,6 +81,7 @@ nmap :ag :Ag
 
 nnoremap <leader>a :Ag<space>
 nnoremap <leader>tt :TagbarToggle<CR>
+nnoremap <leader>gg :GitGutterToggle<CR>
 
 nmap <leader>y :YRShow<cr>
 let g:yankring_replace_n_pkey = '<leader>['
