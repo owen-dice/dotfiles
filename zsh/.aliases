@@ -16,6 +16,9 @@ alias lt='ls -ltr'
 alias lm='ll | more'
 alias tree="tree -C"
 
+
+alias penvp="pipenv run python"
+
 # Find
 alias fr='find . -name'
 alias fh='find $HOME -name'
@@ -34,6 +37,7 @@ alias pingoo="ping -c 3 www.google.com"
 alias cclear="clear;ls"
 alias qwe="mvim"
 alias sqwe='sudo mvim'
+alias nqw="nvim"
 alias subl='open -a Sublime\ Text\ 2'
 alias j="jump"
 alias less="less -s -M +Gg"
@@ -88,7 +92,7 @@ function ssh-tmux {
 alias csvcols="awk -F',' '{print NF}'"
 alias pp='python -m json.tool'
 
-function monitor {
+function monitor_ {
     while true; do eval ${1}; sleep 1; clear; done
 }
 

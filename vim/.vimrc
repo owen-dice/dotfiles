@@ -33,6 +33,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 let g:syntastic_javascript_checkers = ['eslint']
 
+
 set omnifunc=syntaxcomplete#Complete
 nmap <Leader>nn :so %<CR>
 
@@ -49,8 +50,8 @@ let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 :let g:indent_guides_auto_colors=1
 
 "====[ Easy moves between tabs ]===============
-nmap <silent> <c-Right> :tabn<CR>
-nmap <silent> <c-Left> :tabp<CR>
+nmap <silent> <Leader>e :tabn<CR>
+nmap <silent> <Leader>q :tabp<CR>
 
 "================= Remaps ============================
 nnoremap <Space> <PageDown>
@@ -68,8 +69,6 @@ nmap :W  :w
 
 nmap :te :tabe
 nmap :Te :tabe
-nmap :TE :tabe
-nmap :E :e
 nmap :Vsp :vsp
 nmap :Sp :sp
 nmap :yanks :Yanks
@@ -95,8 +94,8 @@ nnoremap { }
 nnoremap } {
 
 " Paragraph moves on left hand
-nnoremap @ }
-nnoremap # {
+nnoremap <c-q> }
+nnoremap <c-e> {
 
 nnoremap R "_d
 
@@ -137,10 +136,10 @@ au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 let vimrplugin_assign = 2
 
 "====[ Window splits ]========
-nmap <silent> <c-w> :wincmd k<CR>
-nmap <silent> <c-s> :wincmd j<CR>
-nmap <silent> <c-a> :wincmd h<CR>
-nmap <silent> <c-d> :wincmd l<CR>
+nmap <silent> <Leader>w :wincmd k<CR>
+nmap <silent> <Leader>s :wincmd j<CR>
+nmap <silent> <Leader>a :wincmd h<CR>
+nmap <silent> <Leader>d :wincmd l<CR>
 
 "====[ Misc ]=================
 let g:syntastic_check_on_open=0
@@ -181,12 +180,13 @@ endif
 " ================[ Theme ]=======================
 set background=light
 "colorscheme kib_darktango
-"colorscheme solarized
+colorscheme solarized
 "colorscheme badwolf
 "colorscheme leya
 "colorscheme base16-atelierforest
+"colorscheme tcsoft
 "colorscheme fokus
-colorscheme desertEx
+"colorscheme desertEx
 "colorscheme summerfruit256
 "colorscheme summerfruit
 "colorscheme candycode
@@ -371,6 +371,7 @@ au BufNewFile,BufRead *.sh setlocal noet ts=2 sw=2
 au BufNewFile,BufRead *.R  setlocal et ts=2 sw=2
 au BufNewFile,BufRead *.jade setlocal et ts=2 sw=2
 au BufNewFile,BufRead *.ml setlocal et ts=2 sw=2
+au BufNewFile,BufRead *.rb setlocal et ts=2 sw=2
 
 "=====[ Completion Scheme ]===================================
 highlight  Pmenu        ctermbg=white   ctermfg=black
