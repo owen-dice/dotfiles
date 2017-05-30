@@ -26,7 +26,7 @@ source_if_exists $HOME/dev/tools/emoji-cli/emoji-cli.zsh
 #eval $(docker-machine env cctv)
 
 # OPAM configuration
-. $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
-eval `opam config env`
+#. $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+#eval `opam config env`
 
 
