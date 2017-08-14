@@ -16,8 +16,8 @@ alias lt='ls -ltr'
 alias lm='ll | more'
 alias tree="tree -C"
 
-
 alias penvp="pipenv run python"
+alias pyton="python2.7"
 
 # Find
 alias fr='find . -name'
@@ -37,6 +37,7 @@ alias pingoo="ping -c 3 www.google.com"
 alias cclear="clear;ls"
 alias qwe="mvim"
 alias sqwe='sudo mvim'
+alias emacs='emacs --deamon'
 alias nqw="nvim"
 alias subl='open -a Sublime\ Text\ 2'
 alias j="jump"
@@ -72,6 +73,10 @@ alias envsubst='/usr/local/Cellar/gettext/0.19.6/bin/envsubst'
 alias weather='curl wttr.in'
 alias moon='curl wttr.in/Moon'
 alias timeout='gtimeout'
+
+function juju_pip {
+    juju status --format=yaml ${1} | grep public-address | cut -d':' -f2
+}
 
 function echo_exec {
     echo "--> $fg_bold[red] ${1} $reset_color"

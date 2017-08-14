@@ -20,7 +20,7 @@ set synmaxcol=200
 set guioptions=gtrLm
 if has("gui_running")
     if has("gui_macvim")
-        set guifont=Menlo\ Regular:h13
+        set guifont=Menlo\ Regular:h14
     endif
 endif
 
@@ -32,6 +32,7 @@ set tags=tags,./tags
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 let g:syntastic_javascript_checkers = ['eslint']
+let g:jedi#goto_command = "<leader> D"
 
 
 set omnifunc=syntaxcomplete#Complete
@@ -112,10 +113,11 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 :let g:ctrlp_map = '<Leader>t'
 :let g:ctrlp_match_window_bottom = 0
 :let g:ctrlp_match_window_reversed = 0
-:let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
+:let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend|ipynb)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
 :let g:ctrlp_working_path_mode = 0
 :let g:ctrlp_switch_buffer = 0
 :let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
 "====[ Multi Cursor ]===============
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-m>'
@@ -184,7 +186,7 @@ colorscheme solarized
 "colorscheme badwolf
 "colorscheme leya
 "colorscheme base16-atelierforest
-"colorscheme tcsoft
+"colorsceme tcsoft
 "colorscheme fokus
 "colorscheme desertEx
 "colorscheme summerfruit256
@@ -192,7 +194,6 @@ colorscheme solarized
 "colorscheme candycode
 "colorscheme bocau
 "colorscheme deveiate
-"colorscheme ekinivim
 "colorscheme dante
 "colorscheme molokai
 "colorscheme coffee

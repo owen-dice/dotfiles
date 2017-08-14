@@ -1,14 +1,13 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
-plugins=(git osxi git-flow colored-man-pages docker pip k terraform)
+plugins=(git osxi git-flow
+         colored-man-pages
+         jump docker pip k terraform)
 
 setopt CORRECT
 setopt RM_STAR_SILENT
 
-if [ -f $HOME/bin/jump-bin ]; then
-    source `$HOME/bin/jump-bin --zsh-integration`
-fi
 
 function source_if_exists {
     if [ -f $1 ]; then
@@ -21,12 +20,25 @@ source_if_exists $HOME/.bashrc
 source_if_exists $HOME/.init_dice.sh
 source_if_exists $HOME/.env
 source_if_exists $HOME/.aliases
-source_if_exists $HOME/dev/tools/emoji-cli/emoji-cli.zsh
 
-#eval $(docker-machine env cctv)
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
-# OPAM configuration
-#. $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
-#eval `opam config env`
+#zplug "jocelynmallon/zshmarks"
 
+zplug "stedolan/jq", \
+    from:gh-r, \
+    as:command, \
+    rename-to:jq
+zplug "b4b4r07/emoji-cli", \
+    on:"stedolan/jq"
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load
 
