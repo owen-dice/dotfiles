@@ -22,7 +22,8 @@ source_if_exists $HOME/.env
 source_if_exists $HOME/.aliases
 
 export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
+
+source_if_exists $ZPLUG_HOME/init.zsh
 
 #zplug "jocelynmallon/zshmarks"
 
@@ -32,6 +33,8 @@ zplug "stedolan/jq", \
     rename-to:jq
 zplug "b4b4r07/emoji-cli", \
     on:"stedolan/jq"
+
+zplug "lib/compfix", from:oh-my-zsh
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "

@@ -11,13 +11,15 @@ alias hstop="$HADOOP_HOME/sbin/stop-yarn.sh;$HADOOP_HOME/sbin/stop-dfs.sh"
 alias ls='ls -G'
 alias ll='ls -hl'
 alias la='ls -a'
+alias lal='ls -als'
 alias lx='ls -lXB'
 alias lt='ls -ltr'
 alias lm='ll | more'
 alias tree="tree -C"
 
 alias penvp="pipenv run python"
-alias pyton="python2.7"
+alias python="python2.7"
+alias pip="pip2"
 
 # Find
 alias fr='find . -name'
