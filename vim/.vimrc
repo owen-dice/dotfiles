@@ -43,8 +43,22 @@ cnoreabbrev Ack Ack!
 nnoremap <leader>a :Ack!<space>
 
 Plugin 'ervandew/supertab'
-"let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
- let g:SuperTabDefaultCompletionType = "<c-n>"
+" let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+"let g:SuperTabDefaultCompletionType = "<c-n>"
+"set omnifunc=syntaxcomplete#Complete
+"au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabCrMapping = 1
+let g:SuperTabLongestEnhanced = 1
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
+let g:SuperTabContextDiscoverDiscovery =  ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
+autocmd FileType *
+      \if &omnifunc != '' |
+      \call SuperTabChain(&omnifunc, "<c-p>") |
+"      \call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+      \endif
 
 Plugin 'terryma/vim-multiple-cursors'
 let g:multi_cursor_use_default_mapping=0
@@ -115,7 +129,7 @@ let g:jedi#goto_command = "<leader> D"
 "let g:pymode_syntax_all=1
 
 " Others
-Plugin 'junegunn/vim-emoji'
+Plugin 'kyuhi/vim-emoji-complete'
 Plugin 'ludovicchabant/vim-gutentags'
 
 Plugin 'SirVer/ultisnips'
@@ -153,12 +167,12 @@ endif
 set tags=tags,./tags
 
 "===[ In test ]================================
-set omnifunc=syntaxcomplete#Complete
+
+
 nmap <Leader>nn :so %<CR>
 
 set completeopt=menuone,menu,longest
 set runtimepath^=~/.vim/bundle/ag
-set completefunc=emoji#complete
 
 
 "====[ Easy moves between tabs ]===============
