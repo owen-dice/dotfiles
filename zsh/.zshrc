@@ -25,8 +25,6 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 
 source_if_exists $ZPLUG_HOME/init.zsh
 
-#zplug "jocelynmallon/zshmarks"
-
 zplug "stedolan/jq", \
     from:gh-r, \
     as:command, \
@@ -45,3 +43,6 @@ fi
 
 zplug load
 
+if which rbenv > /dev/null; then
+    eval "$(rbenv init -)";
+fi

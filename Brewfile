@@ -21,10 +21,11 @@ cask 'atom'
 cask 'sublime-text'
 
 brew 'macvim'
-#brew 'emacs-plus'
+brew 'neovim'
 
 cask 'java'
 cask 'xquartz'
+cask 'chefdk'
 cask 'docker'
 cask 'docker-toolbox'
 
@@ -41,12 +42,17 @@ brew 'wget'
 brew 'boost'
 brew 'terraform'
 brew 'tmux'
+brew 'shellcheck'
+brew 'p7zip'
+brew 'bundle'
+brew 'go'
+brew 'sshuttle'
+brew 'awscli'
+brew 'leveldb'
+
 #brew 'git-flow'
 
 #cask 'mactex'
-
-
-
 
 brew 'coreutils'
 brew 'binutils'
@@ -155,7 +161,4 @@ brew 'protobuf-c'
 
 # Thrift network serialization protocol; compare protobuf.
 brew 'thrift'
-
-
-
 

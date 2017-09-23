@@ -41,6 +41,7 @@ alias qwe="mvim"
 alias sqwe='sudo mvim'
 alias emacs='emacs --deamon'
 alias nqw="nvim"
+alias ewq="nvim"
 alias subl='open -a Sublime\ Text\ 2'
 alias j="jump"
 alias less="less -s -M +Gg"
@@ -50,6 +51,7 @@ alias fucking="sudo"
 # Git Shortcuts
 alias gpom="git push origin master"
 alias gpo="git push origin "
+alias gpof="git push origin --force"
 alias gpall="git push --all"
 alias gs='git status -s'
 alias gc='git commit'

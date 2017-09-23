@@ -15,6 +15,7 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'dougireton/vim-chef'
 Plugin 'google/vim-jsonnet'
 Plugin 'markcornick/vim-vagrant'
+Plugin 'hashivim/vim-terraform'
 
 " Languages
 Plugin 'sheerun/vim-polyglot'
@@ -22,6 +23,11 @@ Plugin 'vim-scripts/Vim-R-plugin'
 Plugin 'adimit/prolog.vim'
 Plugin 'let-def/ocp-indent-vim'
 Plugin 'willpragnell/vim-reprocessed'
+Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plugin 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}
 
 "  Navigations
 Plugin 'easymotion/vim-easymotion'
@@ -43,22 +49,22 @@ cnoreabbrev Ack Ack!
 nnoremap <leader>a :Ack!<space>
 
 Plugin 'ervandew/supertab'
-" let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-"let g:SuperTabDefaultCompletionType = "<c-n>"
+ "let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionType = "<c-n>"
 "set omnifunc=syntaxcomplete#Complete
 "au FileType python set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabCrMapping = 1
-let g:SuperTabLongestEnhanced = 1
-let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
-let g:SuperTabContextDiscoverDiscovery =  ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
-autocmd FileType *
-      \if &omnifunc != '' |
-      \call SuperTabChain(&omnifunc, "<c-p>") |
-"      \call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-      \endif
+"let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabCrMapping = 1
+"let g:SuperTabLongestEnhanced = 1
+"let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+"let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
+"let g:SuperTabContextDiscoverDiscovery =  ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
+"autocmd FileType *
+      "\if &omnifunc != '' |
+      "\call SuperTabChain(&omnifunc, "<c-p>") |
+""      \call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+      "\endif
 
 Plugin 'terryma/vim-multiple-cursors'
 let g:multi_cursor_use_default_mapping=0
@@ -97,15 +103,32 @@ Plugin 'majutsushi/tagbar'
 nnoremap <leader>tt :TagbarToggle<CR>
 
 " Syntax
-"Plugin 'scrooloose/syntastic'
 Plugin 'w0rp/ale'
-let g:ale_completion_enabled = 1
+let g:ale_linters = {
+            \ 'jsx': ['stylelint', 'eslint'],
+            \ 'python': ['pylint'],
+            \ 'go': ['gometalinter']
+            \}
+
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed=0
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '≈'
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+nmap <leader>h :ALELint<CR>
+
+" Plugin 'scrooloose/syntastic'
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 1
 
 Plugin 'Chiel92/vim-autoformat'
 nmap <F3> :Autoformat<CR>
 
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'davidhalter/jedi-vim'
 Plugin 'vim-python/python-syntax'
+Plugin 'mindriot101/vim-yapf'
+" Plugin 'python-mode/python-mode'
+" let g:syntastic_python_checkers = ['pylint']
 
 let g:python_highlight_all = 1
 let g:python_highlight_class_vars=1
@@ -114,23 +137,43 @@ let g:python_highlight_builtin_objs=1
 let g:python_highlight_builtin_funcs=1
 let g:python_highlight_class_vars=1
 "let g:pymode_syntax_highlight_self = 1
-let g:jedi#goto_command = "<leader> D"
-"let g:pymode_python = 'python2'
-"let g:pymode_folding = 0
-"let g:pymode_options_max_line_length = 120
-"let g:pymode_lint_checkers = ['pyflakes_']
-"let g:pymode_lint_checkers = ['pylint']
-"let g:pymode_lint_config = '~/.pylintrc'
-"let g:pymode_lint_ignore = "E302"
-"let g:pymode_breakpoint = 0
-"let g:pymode_doc = 0
-"let g:pymode_rope=0
-"let g:pymode_syntax=1
-"let g:pymode_syntax_all=1
+"let g:jedi#goto_command = "<leader> D"
+" let g:pymode_python = '/usr/local/bin/python3'
+" let g:pymode_folding = 0
+" let g:pymode_options_max_line_length = 120
+let g:pymode_rope=0
+" let g:pymode_syntax=0
+" let g:pymode_syntax_all=0
+" let g:pymode_lint_checkers = ['pyflakes_']
+
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_auto_type_info = 1
+let g:go_addtags_transform = "snakecase"
+let g:go_metalinter_enabled = [
+    \ 'deadcode',
+    \ 'errcheck',
+    \ 'gas',
+    \ 'goconst',
+    \ 'gocyclo',
+    \ 'gosimple',
+    \ 'ineffassign',
+    \ 'vet',
+    \ 'vetshadow'
+\]
+let g:go_metalinter_enabled = ['vet', 'errcheck']
+let g:go_metalinter_excludes = ['golint', 'gotype']
+let g:go_gometalinter_options='--vendor --tests --exclude=mock --exclude=gotype --exclude=golint --disable-all --enable=vet --enable=vetshadow --enable=ineffassign --enable=goconst  --enable=deadcode --enable=errcheck --enable=goimports'
 
 " Others
 Plugin 'kyuhi/vim-emoji-complete'
-Plugin 'ludovicchabant/vim-gutentags'
+"Plugin 'ludovicchabant/vim-gutentags'
 
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -428,6 +471,7 @@ au BufNewFile,BufRead *.R  setlocal et ts=2 sw=2
 au BufNewFile,BufRead *.jade setlocal et ts=2 sw=2
 au BufNewFile,BufRead *.ml setlocal et ts=2 sw=2
 au BufNewFile,BufRead *.rb setlocal et ts=2 sw=2
+au BufNewFile,BufRead *.css setlocal et ts=2 sw=2
 
 "=====[ Completion Scheme ]===================================
 highlight  Pmenu        ctermbg=white   ctermfg=black
