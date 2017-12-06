@@ -29,6 +29,7 @@ cask 'chefdk'
 cask 'docker'
 cask 'docker-toolbox'
 
+brew 'the_silver_searcher'
 brew 'jq'
 brew 'jsonnet'
 

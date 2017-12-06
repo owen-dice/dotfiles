@@ -6,6 +6,7 @@ tailf='tail -f'
 alias hstart="$HADOOP_HOME/sbin/start-dfs.sh;$HADOOP_HOME/sbin/start-yarn.sh"
 alias hstop="$HADOOP_HOME/sbin/stop-yarn.sh;$HADOOP_HOME/sbin/stop-dfs.sh"
 
+alias sshbox="ssh -t ubuntu@tintin01-prod 'ssh -p 8022 gregoire@localhost'"
 
 # ls
 alias ls='ls -G'
@@ -67,6 +68,9 @@ alias gr='git rebase'
 alias gri='git rebase --interactive'
 alias gcp='git cherry-pick'
 alias grm='git rm'
+alias gcaa='git commit -a --amend -C HEAD'
+alias gca='git commit --amend -C HEAD'
+
 alias taginit='/usr/local/bin/ctags -R'
 
 alias usenode='brew unlink iojs && brew link node && echo Updating NPM && npm install -g npm@latest && echo Using Node.js'

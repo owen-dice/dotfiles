@@ -30,7 +30,7 @@ Plugin 'hashivim/vim-terraform'
 
 "=================[ Languages ]
 Plugin 'sheerun/vim-polyglot'
-Plugin 'vim-scripts/Vim-R-plugin'
+Plugin 'jalvesaq/Nvim-R'
 Plugin 'adimit/prolog.vim'
 Plugin 'let-def/ocp-indent-vim'
 Plugin 'willpragnell/vim-reprocessed'
@@ -39,6 +39,8 @@ Plugin 'fsharp/vim-fsharp', {
       \ 'for': 'fsharp',
       \ 'do':  'make fsautocomplete',
       \}
+Plugin 'slashmili/alchemist.vim'
+
 
 "=================[ Navigation ]
 Plugin 'kien/ctrlp.vim'
@@ -49,6 +51,8 @@ let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend|ipynb)$|(^|[/\
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" Plugin 'vim-scripts/ZoomWin'
 
 Plugin 'mileszs/ack.vim'
 if executable('ag')
@@ -68,12 +72,24 @@ Plugin 'honza/vim-snippets'
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 let g:UltiSnipsExpandTrigger="<C-j>"
 
+" let g:deoplete#disable_auto_complete = 1
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" inoremap <expr><tab> pumvisible() ? "\<c-x><c-o>" : "\<tab>"
+
 Plugin 'terryma/vim-multiple-cursors'
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+
+function! Multiple_cursors_before()
+    let b:deoplete_disable_auto_complete = 1
+endfunction
+
+function! Multiple_cursors_after()
+    let b:deoplete_disable_auto_complete = 0
+endfunction
 
 Plugin 'scrooloose/nerdtree'
 let NERDTreeDirArrows=1
@@ -106,7 +122,7 @@ Plugin 'w0rp/ale'
 let g:ale_linters = {
             \ 'jsx': ['stylelint', 'eslint'],
             \ 'python': ['pylint'],
-            \ 'go': ['gometalinter']
+            \ 'go': ['golint', 'gotype']
             \}
 
 let g:ale_lint_on_save = 1

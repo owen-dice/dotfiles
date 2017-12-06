@@ -107,7 +107,7 @@ Plugin 'w0rp/ale'
 let g:ale_linters = {
             \ 'jsx': ['stylelint', 'eslint'],
             \ 'python': ['pylint'],
-            \ 'go': ['gometalinter']
+            \ 'go': ['golint']
             \}
 
 let g:ale_lint_on_save = 1

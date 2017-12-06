@@ -3,7 +3,8 @@ ZSH_THEME="robbyrussell"
 
 plugins=(git osxi git-flow
          colored-man-pages
-         jump docker pip k terraform)
+         jump docker pip k terraform
+         jira)
 
 setopt CORRECT
 setopt RM_STAR_SILENT
